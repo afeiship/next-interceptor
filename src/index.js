@@ -4,7 +4,6 @@
   var NxPluginManager = nx.PluginManager || require('@jswork/next-plugin-manager');
   var nxPromiseCompose = nx.promiseComponse || require('@jswork/next-promise-compose');
   var nxCompose = nx.compose || require('@jswork/next-compose');
-  var nxFilterMap = nx.filterMap || require('@jswork/next-filter-map');
   var DEFAULT_OPTIONS = {
     async: true,
     items: []
