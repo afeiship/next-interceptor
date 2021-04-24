@@ -41,6 +41,7 @@
   describe('NxInterceptor.methods', function () {
     test('intercetpro for response should get reponse pipline(async)', function (done) {
       mtMgr.options.async = true;
+      console.log(mtMgr.manager.gets());
       mtMgr
         .compose({
           id: 100,
