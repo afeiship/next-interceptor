@@ -5,7 +5,6 @@
     items: [
       {
         name: 'aa',
-        type: 'response',
         fn: (data) => {
           return {
             version: 'v1',
@@ -15,7 +14,6 @@
       },
       {
         name: 'std',
-        type: 'response',
         fn: (res) => {
           return {
             key: 'bb',
@@ -25,7 +23,6 @@
       },
       {
         name: 'price-to-float',
-        type: 'response',
         fn: (res) => {
           const { data } = res;
           const { price, ...opts } = data;
@@ -43,6 +40,7 @@
 
   describe('NxInterceptor.methods', function () {
     test('intercetpro for response should get reponse pipline(async)', function (done) {
+      mtMgr.options.async = true;
       mtMgr
         .compose({
           id: 100,
@@ -59,7 +57,8 @@
         });
     });
 
-    test.only('intercetpro for response should get reponse pipline(sync)', function () {
+    test('intercetpro for response should get reponse pipline(sync)', function () {
+      mtMgr.options.async = false;
       const res = mtMgr.compose({
         id: 100,
         price: 108.2143,

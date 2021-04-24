@@ -7,7 +7,6 @@
   var nxFilterMap = nx.filterMap || require('@jswork/next-filter-map');
   var DEFAULT_OPTIONS = {
     async: true,
-    type: 'response',
     items: []
   };
 
@@ -24,17 +23,10 @@
         this.manager.unregister(inName);
       },
       compose: function (inOptions) {
-        var self = this;
         var composer = this.options.async ? nxPromiseCompose : nxCompose;
-        var items = nxFilterMap(
-          self.options.items,
-          function (item) {
-            return item.type === self.options.type;
-          },
-          function (item) {
-            return item.fn;
-          }
-        );
+        var items = this.options.items.map(function (item) {
+          return item.fn;
+        });
 
         return composer.apply(null, items || [])(inOptions);
       }
