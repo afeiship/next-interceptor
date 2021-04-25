@@ -11,16 +11,24 @@
 npm install -S @jswork/next-interceptor
 ```
 
-## apis
-| api | params | description   |
-|-----|--------|---------------|
-| get | -      | desc balabala |
-
 ## usage
 ```js
 import NxInterceptor from '@jswork/next-interceptor';
 
-// code goes here:
+const intercetor = new NxInterceptor({
+  async: false,
+  items:[/* ... your intercetpros ... */]
+});
+
+// register/unregister
+intercetor.regsister({ name: 'i1', type: 'request', fn: xx });
+intercetor.regsister({ name: 'i2', type: 'request', fn: xx });
+intercetor.regsister({ name: 'i3', type: 'response', fn: xx });
+intercetor.regsister({ name: 'i4', type: 'response', fn: xx });
+
+// get response interceptor process data;
+const reqData = intercetor.compose(data1, 'request');
+const resData = intercetor.compose(data2, 'response');
 ```
 
 ## license

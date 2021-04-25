@@ -41,7 +41,8 @@
   },
   "dependencies": {
     "@jswork/next-compose": "^1.0.0",
-    "@jswork/next-plugin-manager": "^1.0.6",
+    "@jswork/next-filter-map": "^1.0.0",
+    "@jswork/next-plugin-manager": "^1.0.7",
     "@jswork/next-promise-compose": "^1.0.2"
   }
 }
