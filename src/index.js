@@ -28,7 +28,7 @@
         return composer.apply(null, items || [])(inOptions);
       },
       /* Proxy manager methods: */
-      'register,unregister,gets,enable,disable': function (inName) {
+      'register,unregister,enable,disable': function (inName) {
         return function () {
           var ctx = this.manager;
           return ctx[inName].apply(ctx, arguments);
