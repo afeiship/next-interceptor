@@ -19,7 +19,7 @@
       },
       compose: function (inOptions, inType) {
         var composer = this.options.async ? nxPromiseCompose : nxCompose;
-        var entities = this.gets();
+        var entities = this.manager.enabled();
         var items = nxFilterMap(
           entities,
           (item) => item.type === inType,
@@ -28,7 +28,7 @@
         return composer.apply(null, items || [])(inOptions);
       },
       /* Proxy manager methods: */
-      'register,unregister,gets': function (inName) {
+      'register,unregister,gets,enable,disable': function (inName) {
         return function () {
           var ctx = this.manager;
           return ctx[inName].apply(ctx, arguments);
