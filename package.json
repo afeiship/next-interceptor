@@ -15,8 +15,8 @@
   "main": "dist/index.js",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.13.14",
-    "@babel/preset-env": "^7.13.12",
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
     "@jswork/gulp-pkg-header": "^1.0.3",
     "@jswork/next": "^1.0.5",
     "del": "^6.0.0",
@@ -31,8 +31,8 @@
     "gulp-uglify": "^3.0.2",
     "jest": "^26.6.3",
     "jest-fetch-mock": "^3.0.3",
-    "release-it": "^14.2.2",
-    "uglify-js": "3.12.4",
+    "release-it": "^14.6.1",
+    "uglify-js": "3.13.4",
     "uglify-save-license": "^0.4.1"
   },
   "publishConfig": {
@@ -42,7 +42,7 @@
   "dependencies": {
     "@jswork/next-compose": "^1.0.0",
     "@jswork/next-filter-map": "^1.0.0",
-    "@jswork/next-plugin-manager": "^1.0.7",
+    "@jswork/next-plugin-manager": "^1.0.8",
     "@jswork/next-promise-compose": "^1.0.2"
   },
   "keywords": [
