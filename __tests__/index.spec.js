@@ -105,5 +105,31 @@
         data: { id: 100, login: 'afeiship', price: 108.21 }
       });
     });
+
+    test.only('single types support', () => {
+      var interceptor = new NxInterceptor({
+        async: false,
+        types: ['meta'],
+        items: [
+          {
+            fn: (meta) => {
+              const fields = meta.fields;
+              meta.fields = fields.map((item) => item.toUpperCase());
+              return meta;
+            }
+          },
+          {
+            fn: (meta) => {
+              const fields = meta.fields;
+              meta.fields = fields.map((item) => item + item);
+              return meta;
+            }
+          }
+        ]
+      });
+
+      const res = interceptor.compose({ fields: ['a', 'b'] });
+      expect(res).toEqual({ fields: ['AA', 'BB'] });
+    });
   });
 })();
