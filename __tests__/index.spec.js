@@ -106,7 +106,7 @@
       });
     });
 
-    test.only('single types support', () => {
+    test('single types support', () => {
       var interceptor = new NxInterceptor({
         async: false,
         types: ['meta'],
