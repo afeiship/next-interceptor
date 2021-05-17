@@ -20,13 +20,10 @@
       compose: function (inOptions, inType) {
         var composer = this.options.async ? nxPromiseCompose : nxCompose;
         var entities = this.manager.enabled();
+        var filterFn = (item) => item.fn;
         var items = inType
-          ? nxFilterMap(
-              entities,
-              (item) => item.type === inType,
-              (item) => item.fn
-            )
-          : entities.map((item) => item.fn);
+          ? nxFilterMap(entities, (item) => item.type === inType, filterFn)
+          : entities.map(filterFn);
         return composer.apply(null, items || [])(inOptions);
       },
       /* Proxy manager methods: */
