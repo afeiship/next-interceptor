@@ -3,7 +3,7 @@
   var nx = global.nx || require('@jswork/next');
   var NxPluginManager = nx.PluginManager || require('@jswork/next-plugin-manager');
   var nxPromiseCompose = nx.promiseComponse || require('@jswork/next-promise-compose');
-  var nxCompose = nx.compose || require('@jswork/next-compose');
+  var nxPipe = nx.pipe || require('@jswork/next-pipe');
   var nxFilterMap = nx.filterMap || require('@jswork/next-filter-map');
   var DEFAULT_OPTIONS = {
     async: false,
@@ -18,7 +18,7 @@
         this.manager = NxPluginManager.getInstance(this.options.items, 'name');
       },
       compose: function (inOptions, inType) {
-        var composer = this.options.async ? nxPromiseCompose : nxCompose;
+        var composer = this.options.async ? nxPromiseCompose : nxPipe;
         var entities = this.manager.enabled();
         var filterFn = (item) => item.fn;
         var items = inType

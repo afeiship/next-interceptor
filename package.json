@@ -40,7 +40,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "@jswork/next-compose": "^1.0.0",
+    "@jswork/next-pipe": "^1.1.0",
     "@jswork/next-filter-map": "^1.0.0",
     "@jswork/next-plugin-manager": "^1.0.8",
     "@jswork/next-promise-compose": "^1.0.2"
