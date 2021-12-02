@@ -2,7 +2,7 @@
   "name": "@jswork/next-interceptor",
   "version": "1.0.4",
   "description": "Interceptor for next.",
-  "homepage": "https://github.com/afeiship/next-interceptor",
+  "homepage": "https://js.work",
   "author": {
     "name": "afei",
     "email": "1290657123@qq.com"
@@ -52,5 +52,9 @@
     "promise",
     "pipe",
     "pipeline"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afeiship/next-interceptor.git"
+  }
 }
