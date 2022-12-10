@@ -22,7 +22,7 @@
         var entities = this.manager.enabled();
         var filterFn = (item) => item.fn;
         var items = inType
-          ? nxFilterMap(entities, (item) => item.type === inType, filterFn)
+          ? nxFilterMap(entities, (item) => [item.fn, item.type === inType])
           : entities.map(filterFn);
         return composer.apply(null, items || [])(inOptions);
       },
