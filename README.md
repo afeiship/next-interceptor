@@ -8,14 +8,21 @@
 
 ## installation
 ```bash
-yarn add @jswork/next-interceptor
+npm install -S @jswork/next-interceptor
 ```
 
 ## usage
 ```js
-import '@jswork/next-interceptor';
+import NxInterceptor from '@jswork/next-interceptor';
 
-//DOCS here!
+const intercetor = new NxInterceptor({
+  async: false,
+  items:[/* ... your intercetpros ... */]
+});
+
+// get response interceptor process data;
+const reqData = intercetor.compose(data1, 'request');
+const resData = intercetor.compose(data2, 'response');
 ```
 
 ## license
