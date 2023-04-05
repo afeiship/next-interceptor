@@ -1,42 +1,31 @@
-(function () {
-  var global = typeof window !== 'undefined' ? window : this || Function('return this')();
-  var nx = global.nx || require('@jswork/next');
-  var NxPluginManager = nx.PluginManager || require('@jswork/next-plugin-manager');
-  var nxPromiseCompose = nx.promiseComponse || require('@jswork/next-promise-compose');
-  var nxPipe = nx.pipe || require('@jswork/next-pipe');
-  var nxFilterMap = nx.filterMap || require('@jswork/next-filter-map');
-  var DEFAULT_OPTIONS = {
-    async: false,
-    types: ['request', 'response'],
-    items: []
-  };
+import nx from '@jswork/next';
 
-  var NxInterceptor = nx.declare('nx.Interceptor', {
-    methods: {
-      init: function (inOptions) {
-        this.options = nx.mix(null, DEFAULT_OPTIONS, inOptions);
-        this.manager = NxPluginManager.getInstance(this.options.items, 'name');
-      },
-      compose: function (inOptions, inType) {
-        var composer = this.options.async ? nxPromiseCompose : nxPipe;
-        var entities = this.manager.enabled();
-        var filterFn = (item) => item.fn;
-        var items = inType
-          ? nxFilterMap(entities, (item) => [item.fn, item.type === inType])
-          : entities.map(filterFn);
-        return composer.apply(null, items || [])(inOptions);
-      },
-      /* Proxy manager methods: */
-      'register,unregister,enable,disable': function (inName) {
-        return function () {
-          var ctx = this.manager;
-          return ctx[inName].apply(ctx, arguments);
-        };
-      }
+const nxPromiseCompose = nx.promiseComponse || require('@jswork/next-promise-compose');
+const nxPipe = nx.pipe || require('@jswork/next-pipe');
+const nxFilterMap = nx.filterMap || require('@jswork/next-filter-map');
+const defaults = {
+  async: false,
+  items: []
+};
+
+const NxInterceptor = nx.declare('nx.Interceptor', {
+  methods: {
+    init: function (inOptions) {
+      this.options = nx.mix(null, defaults, inOptions);
+    },
+    compose: function (inOptions, inType) {
+      var composer = this.options.async ? nxPromiseCompose : nxPipe;
+      var entities = this.options.items;
+      var items = inType
+        ? nxFilterMap(entities, (item) => [item.type === inType, item.fn])
+        : entities.map((item) => item.fn);
+      return composer.apply(null, items || [])(inOptions);
     }
-  });
-
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = NxInterceptor;
   }
-})();
+});
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = NxInterceptor;
+}
+
+export default NxInterceptor;

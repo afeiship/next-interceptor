@@ -1,3 +1,3 @@
 interface NxStatic {
-  Interceptor: any;
+  // your codes goes here.
 }
