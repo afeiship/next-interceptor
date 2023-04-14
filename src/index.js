@@ -17,8 +17,8 @@ const NxInterceptor = nx.declare('nx.Interceptor', {
       var composer = this.options.async ? nx.promiseCompose : nx.pipe;
       var entities = this.options.items;
       var items = inType
-        ? nx.filterMap(entities, (item) => [item.type === inType, item.fn])
-        : entities.map((item) => item.fn);
+        ? nx.filterMap(entities, (item) => [!item.disabled && item.type === inType, item.fn])
+        : nx.filterMap(entities, (item) => !item.disabled, item.fn);
       return composer.apply(null, items || [])(inPayload);
     }
   }
