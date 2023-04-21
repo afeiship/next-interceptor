@@ -12,14 +12,27 @@ const NxInterceptor = nx.declare('nx.Interceptor', {
   methods: {
     init: function (inOptions) {
       this.options = nx.mix(null, defaults, inOptions);
+      this.activeItems = [];
     },
-    compose: function (inPayload, inType) {
-      var composer = this.options.async ? nx.promiseCompose : nx.pipe;
+    applyItems: function (inWhen) {
       var entities = this.options.items;
-      var items = inType
-        ? nx.filterMap(entities, (item) => [!item.disabled && item.type === inType, item.fn])
-        : nx.filterMap(entities, (item) => !item.disabled, item.fn);
-      return composer.apply(null, items || [])(inPayload);
+      var filterType =
+        typeof inWhen === 'function'
+          ? inWhen
+          : (item) => {
+              if (!inWhen) return item;
+              return item.type === inWhen;
+            };
+      var filterDisabled = (item) => !item.disabled;
+      this.activeItems = nx.filterMap(entities, (item) => [
+        filterDisabled(item) && filterType(item),
+        item.fn
+      ]);
+    },
+    compose: function (inPayload, inWhen) {
+      var composer = this.options.async ? nx.promiseCompose : nx.pipe;
+      this.applyItems(inWhen);
+      return composer.apply(null, this.activeItems)(inPayload);
     }
   }
 });

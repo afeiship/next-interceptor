@@ -3,7 +3,36 @@ require('../src');
 jest.setTimeout(60 * 1000);
 
 describe('api.basic test', () => {
-  test('sync nx.interceptor', function () {
+  test('sync nx.interceptor - all', function () {
+    const interceptor = new nx.Interceptor({
+      items: [
+        {
+          type: 'request',
+          fn: function (inOptions) {
+            return inOptions + '1';
+          }
+        },
+        {
+          type: 'request',
+          fn: function (inOptions) {
+            return inOptions + '2';
+          }
+        },
+        {
+          type: 'response',
+          fn: function (inOptions) {
+            return inOptions + '3';
+          }
+        }
+      ]
+    });
+
+    const result = interceptor.compose('a');
+    expect(result).toBe('a123');
+    expect(interceptor.activeItems.length).toBe(3);
+  });
+
+  test('sync nx.interceptor only request', function () {
     const interceptor = new nx.Interceptor({
       items: [
         {
