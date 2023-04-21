@@ -177,4 +177,35 @@ describe('api.basic test', () => {
     const res = await interceptor.compose('a', 'request');
     expect(res).toBe('a2');
   });
+
+  test('intercepotr with dynamic items', () => {
+    const interceptor = new nx.Interceptor({
+      items: [
+        {
+          name: 'n1',
+          type: 'request',
+          fn: function (inOptions) {
+            return inOptions + '1';
+          }
+        },
+        {
+          name: 'n2',
+          type: 'request',
+          fn: function (inOptions) {
+            return inOptions + '2';
+          }
+        },
+        {
+          name: 'n3',
+          type: 'response',
+          fn: function (inOptions) {
+            return inOptions + '3';
+          }
+        }
+      ]
+    });
+
+    const res = interceptor.compose('a', (item) => item.type === 'request' && item.name === 'n2');
+    expect(res).toBe('a2');
+  });
 });
