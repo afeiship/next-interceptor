@@ -37,7 +37,7 @@ const NxInterceptor = nx.declare('nx.Interceptor', {
   }
 });
 
-if (typeof module !== 'undefined' && module.exports) {
+if (typeof module !== 'undefined' && module.exports && typeof wx === 'undefined') {
   module.exports = NxInterceptor;
 }
 
