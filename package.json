@@ -1,6 +1,6 @@
 {
   "name": "@jswork/next-interceptor",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Interceptor for next.",
   "homepage": "https://js.work",
   "author": {
@@ -45,7 +45,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "@jswork/next-filter-map": "^1.2.2",
+    "@jswork/next-filter-map": "^1.2.3",
     "@jswork/next-pipe": "^1.1.2",
     "@jswork/next-promise-compose": "^1.0.7"
   },
