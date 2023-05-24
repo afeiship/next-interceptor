@@ -46,8 +46,8 @@
   },
   "dependencies": {
     "@jswork/next-filter-map": "^1.2.2",
-    "@jswork/next-pipe": "^1.1.1",
-    "@jswork/next-promise-compose": "^1.0.6"
+    "@jswork/next-pipe": "^1.1.2",
+    "@jswork/next-promise-compose": "^1.0.7"
   },
   "keywords": [
     "next",
