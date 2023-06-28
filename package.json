@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@jswork/next-filter-map": "^1.2.3",
-    "@jswork/pipe": "^1.0.2"
+    "@jswork/pipe": "^1.0.3"
   },
   "keywords": [
     "next",
