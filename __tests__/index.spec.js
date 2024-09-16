@@ -208,4 +208,33 @@ describe('api.basic test', () => {
     const res = interceptor.compose('a', (item) => item.type === 'request' && item.name === 'n2');
     expect(res).toBe('a2');
   });
+
+  test('interceptor with priority', () => {
+    const interceptor = new nx.Interceptor({
+      items: [
+        {
+          priority: 10,
+          name: 'n1',
+          fn: function (inOptions) {
+            return inOptions + '1';
+          }
+        },
+        {
+          priority: 2,
+          name: 'n2',
+          fn: function (inOptions) {
+            return inOptions + '2';
+          }
+        },
+        {
+          name: 'n3',
+          fn: function (inOptions) {
+            return inOptions + '3';
+          }
+        }
+      ]
+    });
+    const res = interceptor.compose('a', (item) => !!item.name);
+    expect(res).toBe('a213');
+  });
 });

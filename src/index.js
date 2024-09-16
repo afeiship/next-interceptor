@@ -4,7 +4,8 @@ import '@jswork/next-filter-map';
 
 const defaults = {
   async: false,
-  items: []
+  items: [],
+  priority: 1000
 };
 
 const NxInterceptor = nx.declare('nx.Interceptor', {
@@ -13,23 +14,32 @@ const NxInterceptor = nx.declare('nx.Interceptor', {
       this.options = nx.mix(null, defaults, inOptions);
       this.activeItems = [];
     },
+    processItems: function () {
+      const { items, priority } = this.options;
+      return items
+        .map((item) => {
+          item.priority = item.priority || priority;
+          return item;
+        })
+        .sort((a, b) => a.priority - b.priority);
+    },
     applyItems: function (inWhen) {
-      var entities = this.options.items;
-      var filterType =
+      const entities = this.processItems();
+      const filterType =
         typeof inWhen === 'function'
           ? inWhen
           : (item) => {
               if (!inWhen) return item;
               return item.type === inWhen;
             };
-      var filterDisabled = (item) => !item.disabled;
+      const filterDisabled = (item) => !item.disabled;
       this.activeItems = nx.filterMap(entities, (item) => [
         filterDisabled(item) && filterType(item),
         item.fn
       ]);
     },
     compose: function (inPayload, inWhen) {
-      var composer = this.options.async ? pipe.async : pipe.sync;
+      const composer = this.options.async ? pipe.async : pipe.sync;
       this.applyItems(inWhen);
       return composer.apply(null, this.activeItems)(inPayload);
     }
