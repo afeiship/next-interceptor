@@ -1,4 +1,4 @@
-require('../src');
+import '../src';
 
 jest.setTimeout(60 * 1000);
 
